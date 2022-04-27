@@ -1,10 +1,10 @@
 import React from "react";
 
 const styleCheckBox =
-  "col-span-1 active:rounded h-full border-gray-200  shadow-myInner shadow-cyan-100 border-2 rounded px-5 outline-none hover:shadow-transparent transition hover:cursor-pointer";
+  "col-span-1 active:rounded bg-white h-full border-gray-200  shadow-myInner shadow-cyan-100 border-2 rounded px-5 outline-none hover:shadow-transparent transition hover:cursor-pointer";
 
 const styleCheckBoxCol2 =
-  "col-span-2 active:rounded h-full border-gray-200  shadow-myInner shadow-cyan-100 border-2 rounded px-5 outline-none hover:shadow-transparent transition hover:cursor-pointer";
+  "col-span-2 active:rounded h-full bg-white border-gray-200  shadow-myInner shadow-cyan-100 border-2 rounded px-5 outline-none hover:shadow-transparent transition hover:cursor-pointer";
 
 const inputStyle =
   "col-span-2 h-full border-gray-200  shadow-myInner shadow-cyan-100 border-2 rounded px-5 outline-none hover:shadow-transparent transition";
