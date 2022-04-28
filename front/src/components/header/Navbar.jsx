@@ -35,6 +35,7 @@ export default function Navbar() {
   const renderNavItems = navItems.map((item, index) => {
     return index === 1 ? (
       <li
+        key={index}
         className={`p-2 flex items-center hover:bg-red-500 mx-1 hover:text-gray-100 rounded transition hover:cursor-pointer text-sm ${
           index === active ? "bg-red-600 text-gray-100 " : "null"
         }`}
@@ -49,6 +50,7 @@ export default function Navbar() {
           index === active ? "bg-red-600 text-gray-100 " : "null"
         }`}
         onClick={() => setActive(index)}
+        key={index}
       >
         {item.name}
       </li>
@@ -67,8 +69,8 @@ export default function Navbar() {
       <div className="w-2/3">
         <ul className="flex items-center h-full">{renderNavItems}</ul>
       </div>
-      <div className="w-1/4 flex justify-between items-center">
-        <button className="text-sm items-center transition hover:text-gray-100 hover:bg-red-500 border-red-600 text-red-600 rounded px-4 py-2 border-2 flex">
+      <div className="w-1/4 flex justify-end items-center">
+        <button className="text-sm ml-2 items-center transition hover:text-gray-100 hover:bg-red-500 border-red-600 text-red-600 rounded px-4 py-2 border-2 flex">
           <PlusIcon className="w-3 h-3 mx-1" />
           دسته‌بندی‌ها
         </button>

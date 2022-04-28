@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 const usersSchema = new mongoose.Schema({
   name: {
@@ -47,6 +48,8 @@ const usersSchema = new mongoose.Schema({
       message: "confirm password must same password",
     },
   },
+  resetPassword: String,
+  expireResetPasswordToken: Date,
 });
 
 // delete confirm password
@@ -59,6 +62,16 @@ usersSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
+
+usersSchema.methods.generateResetPasswordToken = function () {
+  const resetPassword = crypto.randomBytes(32).toString("hex");
+  this.resetPassword = crypto
+    .createHash("sha256")
+    .update(resetPassword)
+    .digest("hex");
+
+  return resetPassword;
+};
 
 usersSchema.methods.comparePassword = async (userPass, dbPass) => {
   return await bcrypt.compare(userPass, dbPass);
