@@ -4,6 +4,8 @@ import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { fetchLogin } from "../Api/fetchApis";
 import Spinner from "../tools/Spinner";
+import { Link } from "react-router-dom";
+import { LockOpenIcon } from "@heroicons/react/solid";
 
 const inputStyle =
   "w-full h-14 border-gray-200  shadow-myInner shadow-cyan-100 border-2 rounded px-5 outline-none hover:shadow-transparent transition";
@@ -115,6 +117,17 @@ export default function Login() {
               رمز عبور حداقل بايد 8 رقم باشد
             </span>
           )}
+        </div>
+        <div className="flex my-2">
+          <span>
+            <Link
+              className="flex items-center hover:text-red-500 transition"
+              to="/auth/forgotPassword"
+            >
+              <LockOpenIcon height={20} width={20} />
+              فراموشی رمز عبور
+            </Link>
+          </span>
         </div>
         <div className="my-2">
           <button

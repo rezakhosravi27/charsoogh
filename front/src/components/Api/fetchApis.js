@@ -10,10 +10,22 @@ export const fetchSignUp = async (userData) => {
 };
 
 export const fetchLogin = async (userData) => {
-  console.log("login api func", userData);
-  const response = await axios
-    .post(`${baseApi}/api/v1/users/login`, userData)
-    .then()
-    .catch();
+  const response = await axios.post(`${baseApi}/api/v1/users/login`, userData);
+  return response;
+};
+
+export const fetchForgotPassword = async (userData) => {
+  const response = await axios.post(
+    `${baseApi}/api/v1/users/forgotPassword`,
+    userData
+  );
+  return response;
+};
+
+export const fetchResetPassword = async (userData) => {
+  const response = await axios.post(
+    `${baseApi}/api/v1/users/forgotPassword/${userData[1]}`,
+    userData[0]
+  );
   return response;
 };

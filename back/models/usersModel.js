@@ -48,29 +48,28 @@ const usersSchema = new mongoose.Schema({
       message: "confirm password must same password",
     },
   },
-  resetPassword: String,
+  resetPasswordToken: String,
   expireResetPasswordToken: Date,
 });
 
-// delete confirm password
-usersSchema.pre("save", function (next) {
+usersSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 12);
   this.confirmPassword = undefined;
   next();
 });
 
-usersSchema.pre("save", async function (next) {
-  this.password = await bcrypt.hash(this.password, 12);
-  next();
-});
+usersSchema.methods.generateResetToken = async function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
 
-usersSchema.methods.generateResetPasswordToken = function () {
-  const resetPassword = crypto.randomBytes(32).toString("hex");
-  this.resetPassword = crypto
+  this.resetPasswordToken = crypto
     .createHash("sha256")
-    .update(resetPassword)
+    .update(resetToken)
     .digest("hex");
 
-  return resetPassword;
+  this.expireResetPasswordToken = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
 };
 
 usersSchema.methods.comparePassword = async (userPass, dbPass) => {

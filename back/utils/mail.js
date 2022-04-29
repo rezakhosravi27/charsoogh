@@ -13,9 +13,9 @@ const sendMail = async (option) => {
   const mailOptions = {
     from: '"Fred Foo 👻" <reza.khosravi245996@gmail.com>', // sender address
     to: option.email, // list of receivers
-    subject: "ایمیل اعتبار سنجی", // Subject line
-    text: "Hello world?", // plain text body
-    html: `<h1>this is a  link auth email</h1> <br /> <a href='http://localhost:3000/${option.token}'></a>`,
+    subject: option.subject, // Subject line
+    text: option.text,
+    html: option.html,
   };
 
   await transporter.sendMail(mailOptions);
