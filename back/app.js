@@ -5,6 +5,8 @@ dotenv.config({
   path: "./config.env",
 });
 const usersRouter = require("./routes/usersRoutes");
+const collectionRouter = require("./routes/collectionRoutes");
+const mobileRouter = require("./routes/mobileRoutes");
 const rateLimiter = require("express-rate-limit");
 const cors = require("cors");
 
@@ -13,6 +15,8 @@ const limiter = rateLimiter({
   max: 5,
   message: "many request in this time please try agein later",
 });
+
+app.use("/public", express.static("public"));
 
 app.use(
   cors({
@@ -24,5 +28,7 @@ app.use(express.json());
 
 // users routes
 app.use("/api/v1/users", limiter, usersRouter);
+app.use("/api/v1/collections", limiter, collectionRouter);
+app.use("/api/v1/mobiles", limiter, mobileRouter);
 
 module.exports = app;
