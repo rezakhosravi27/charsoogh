@@ -195,7 +195,7 @@ exports.resetPassword = async (req, res) => {
       (user.confirmPassword = req.body.confirmPassword),
       (user.resetPasswordToken = undefined),
       (user.expireResetPasswordToken = undefined),
-      user.save();
+      await user.save();
 
     createSendCode(res, user, 200);
   } catch (err) {

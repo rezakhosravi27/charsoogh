@@ -135,7 +135,7 @@ export default function Login() {
             className="bg-red-600 text-white rounded outline-none py-2 px-6"
           >
             {isLoading ? (
-              <Spinner color="white" height="5" width="5" />
+              <Spinner color="white" height="h-5" width="w-5" />
             ) : (
               "ورود"
             )}
