@@ -37,4 +37,10 @@ router
   .post(upload.single("image"), mobileController.createMobile)
   .get(mobileController.getMobiles);
 
+router
+  .route("/:mobileId")
+  .get(mobileController.getMobile)
+  .patch(mobileController.updateMobile)
+  .delete(mobileController.deleteMobile);
+
 module.exports = router;

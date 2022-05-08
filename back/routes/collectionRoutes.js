@@ -8,4 +8,10 @@ router
   .get(collectionControllers.getCollections)
   .post(collectionControllers.createCollection);
 
+router
+  .route("/:collectionId")
+  .delete(collectionControllers.deleteCollection)
+  .get(collectionControllers.getCollection)
+  .patch(collectionControllers.updateCollection);
+
 module.exports = router;

@@ -18,14 +18,15 @@ const collectionSchema = new mongoose.Schema(
   }
 );
 
-collectionSchema.pre(/^find/, function (next) {
-  next();
-});
-
 collectionSchema.virtual("mobiles", {
   ref: "Mobiles",
   localField: "_id",
   foreignField: "parent",
+});
+
+collectionSchema.pre(/^find/, function (next) {
+  this.populate("mobiles");
+  next();
 });
 
 const collectionModel = mongoose.model("Collections", collectionSchema);
