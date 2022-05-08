@@ -1,6 +1,7 @@
 import React from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
 
 const navItems = [
   {
@@ -33,7 +34,18 @@ export default function Navbar() {
   const [active, setActive] = React.useState(0);
 
   const renderNavItems = navItems.map((item, index) => {
-    return index === 1 ? (
+    return index === 0 ? (
+      <li
+        key={index}
+        className={`p-2 flex items-center hover:bg-red-500 mx-1 hover:text-gray-100 rounded transition hover:cursor-pointer text-sm ${
+          index === active ? "bg-red-600 text-gray-100 " : "null"
+        }`}
+        onClick={() => setActive(index)}
+      >
+        <Link to="/">{item.name}</Link>
+        <ChevronDownIcon className="w-3 h-3 text-gray-400" />
+      </li>
+    ) : index === 1 ? (
       <li
         key={index}
         className={`p-2 flex items-center hover:bg-red-500 mx-1 hover:text-gray-100 rounded transition hover:cursor-pointer text-sm ${
