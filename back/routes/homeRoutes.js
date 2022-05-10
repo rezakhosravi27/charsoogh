@@ -32,6 +32,15 @@ const upload = multer({
 
 const router = express.Router();
 
-router.route("/").post(upload.single("image"),homeController.createHome);
+router
+  .route("/")
+  .post(upload.single("image"), homeController.createHome)
+  .get(homeController.getHomes);
+
+router
+  .route("/:homeId")
+  .get(homeController.getHome)
+  .delete(homeController.deleteHome)
+  .patch(homeController.updateHome);
 
 module.exports = router;

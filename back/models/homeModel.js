@@ -15,15 +15,9 @@ const homeSchema = new mongoose.Schema({
     required: true,
     min: [0, "price can not  lower 0"],
   },
-  location: {
-    type: {
-      type: String,
-      enum: "Point",
-      default: "Point"
-    },
-    coordinates: {
-      type: [Number],
-    },
+  city: {
+    type: String,
+    required: true,
   },
   image: {
     type: String,
@@ -35,6 +29,6 @@ const homeSchema = new mongoose.Schema({
   },
 });
 
-const homeModel = mongoose.model("home", homeSchema);
+const homeModel = mongoose.model("Home", homeSchema);
 
 module.exports = homeModel;

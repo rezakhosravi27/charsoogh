@@ -33,6 +33,6 @@ app.use("/api/v1/users", limiter, usersRouter);
 app.use("/api/v1/collections", limiter, collectionRouter);
 app.use("/api/v1/mobiles", limiter, mobileRouter);
 app.use("/api/v1/allCategories", limiter, allCategoriesRouter);
-app.use("/api/v1/home", limiter, homeRouter);
+app.use("/api/v1/homes", limiter, homeRouter);
 
 module.exports = app;
