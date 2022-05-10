@@ -29,6 +29,7 @@ const homeSchema = new mongoose.Schema({
   },
 });
 
+
 const homeModel = mongoose.model("Home", homeSchema);
 
 module.exports = homeModel;
