@@ -1,6 +1,7 @@
 const carModel = require("../models/carModel");
 
 exports.createCar = async (req, res) => {
+  console.log(req.headers.authorization);
   const url = req.protocol + "://" + req.get("host");
   try {
     const carData = {
