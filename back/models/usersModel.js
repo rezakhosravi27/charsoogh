@@ -9,6 +9,11 @@ const usersSchema = new mongoose.Schema({
     required: [true, "name is must requiered"],
     trim: true,
   },
+  shopName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
@@ -47,6 +52,10 @@ const usersSchema = new mongoose.Schema({
       },
       message: "confirm password must same password",
     },
+  },
+  active: {
+    type: Boolean, 
+    default: true,
   },
   resetPasswordToken: String,
   expireResetPasswordToken: Date,

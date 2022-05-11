@@ -1,6 +1,7 @@
 const express = require("express");
 const carControllers = require("../controllers/carController");
 const multer = require("multer");
+const authController = require("../controllers/authController");
 
 const DIR = "./public/";
 const storage = multer.diskStorage({
@@ -34,13 +35,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .post(upload.single("image"), carControllers.createCar)
+  .post(
+    authController.protect,
+    upload.single("image"),
+    carControllers.createCar
+  )
   .get(carControllers.getCars);
-  
+
 router
   .route("/:carId")
   .get(carControllers.getCar)
-  .delete(carControllers.deleteCar)
-  .patch(carControllers.updateCar);
+  .delete(authController.protect, carControllers.deleteCar)
+  .patch(authController.protect, carControllers.updateCar);
 
 module.exports = router;

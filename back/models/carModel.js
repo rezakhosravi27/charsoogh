@@ -30,10 +30,20 @@ const carSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  activePost: {
+    type: Boolean,
+    default: false,
+    select: false,
+  },
 });
 
 carSchema.pre("save", function (next) {
   this.createdAt = new Date(this.createdAt).getTime();
+  next();
+});
+
+carSchema.pre(/^find/, function (next) {
+  this.find({ activePost: { $ne: false } });
   next();
 });
 

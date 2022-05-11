@@ -1,6 +1,7 @@
 const homeModel = require("../models/homeModel");
 
 exports.createHome = async (req, res) => {
+  console.log(req.body);
   try {
     const homeData = {
       ...req.body,
@@ -8,7 +9,6 @@ exports.createHome = async (req, res) => {
       image:
         req.protocol + "://" + req.get("host") + "/public/" + req.file.filename,
     };
-    console.log(homeData);
     const home = await homeModel.create(homeData);
     res.status(201).json({
       status: "success",
@@ -116,4 +116,3 @@ exports.updateHome = async (req, res) => {
     });
   }
 };
-

@@ -1,5 +1,6 @@
 const express = require("express");
 const mobileController = require("../controllers/mobileController");
+const authController = require("../controllers/authController");
 const multer = require("multer");
 
 const DIR = "./public/";
@@ -34,13 +35,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .post(upload.single("image"), mobileController.createMobile)
+  .post(
+    authController.protect,
+    upload.single("image"),
+    mobileController.createMobile
+  )
   .get(mobileController.getMobiles);
 
 router
   .route("/:mobileId")
   .get(mobileController.getMobile)
-  .patch(mobileController.updateMobile)
-  .delete(mobileController.deleteMobile);
+  .patch(authController.protect, mobileController.updateMobile)
+  .delete(authController.protect, mobileController.deleteMobile);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require("express");
 const homeController = require("../controllers/homeController");
+const authController = require("../controllers/authController");
 const multer = require("multer");
 
 const DIR = "./public/";
@@ -34,13 +35,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .post(upload.single("image"), homeController.createHome)
+  .post(
+    authController.protect,
+    upload.single("image"),
+    homeController.createHome
+  )
   .get(homeController.getHomes);
 
 router
   .route("/:homeId")
   .get(homeController.getHome)
-  .delete(homeController.deleteHome)
-  .patch(homeController.updateHome);
+  .delete(authController.protect, homeController.deleteHome)
+  .patch(authController.protect, homeController.updateHome);
 
 module.exports = router;

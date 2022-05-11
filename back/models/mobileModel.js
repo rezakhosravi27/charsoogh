@@ -39,6 +39,25 @@ const mobileSchema = new mongoose.Schema({
     ref: "Collections",
     required: [true, "parent of mobiles must be required"],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  activePost: {
+    type: Boolean,
+    default: false,
+    select: false,
+  },
+});
+
+mobileSchema.pre("save", function (next) {
+  this.createdAt = new Date(this.createdAt).getTime();
+  next();
+});
+
+mobileSchema.pre(/^find/, function (next) {
+  this.find({ activePost: { $ne: false } });
+  next();
 });
 
 const mobileModel = mongoose.model("Mobiles", mobileSchema);
