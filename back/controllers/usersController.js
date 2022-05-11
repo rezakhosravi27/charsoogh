@@ -205,3 +205,24 @@ exports.resetPassword = async (req, res) => {
     });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const userDelete = await usersModel.findByIdAndUpdate(
+      req.params.userId,
+      { active: false },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json({
+      status: "success",
+      message: "user delete",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "unSuccess",
+      message: err,
+    });
+  }
+};

@@ -1,5 +1,5 @@
 const express = require("express");
-const mobileController = require("../controllers/mobileController");
+const homeController = require("../controllers/homeController");
 const authController = require("../controllers/authController");
 const multer = require("multer");
 
@@ -19,8 +19,8 @@ const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (
-      file.mimetype == "image/jpeg" ||
       file.mimetype == "image/png" ||
+      file.mimetype == "image/jpeg" ||
       file.mimetype == "image/jpg"
     ) {
       cb(null, true);
@@ -38,14 +38,14 @@ router
   .post(
     authController.protect,
     upload.single("image"),
-    mobileController.createMobile
+    homeController.createHome
   )
-  .get(mobileController.getMobiles);
+  .get(homeController.getHomes);
 
 router
-  .route("/:mobileId")
-  .get(mobileController.getMobile)
-  .patch(authController.protect, mobileController.updateMobile)
-  .delete(authController.protect, mobileController.deleteMobile);
+  .route("/:homeId")
+  .get(homeController.getHome)
+  .delete(authController.protect, homeController.deleteHome)
+  .patch(authController.protect, homeController.updateHome);
 
 module.exports = router;

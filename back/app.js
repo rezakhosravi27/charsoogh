@@ -8,6 +8,8 @@ const usersRouter = require("./routes/usersRoutes");
 const collectionRouter = require("./routes/collectionRoutes");
 const mobileRouter = require("./routes/mobileRoutes");
 const allCategoriesRouter = require("./routes/allCategories");
+const carRouter = require("./routes/carRoutes"); 
+const homeRouter = require("./routes/homeRoutes");
 const rateLimiter = require("express-rate-limit");
 const cors = require("cors");
 
@@ -27,10 +29,12 @@ app.use(
 
 app.use(express.json());
 
-// users routes
+// routes
 app.use("/api/v1/users", limiter, usersRouter);
 app.use("/api/v1/collections", limiter, collectionRouter);
 app.use("/api/v1/mobiles", limiter, mobileRouter);
 app.use("/api/v1/allCategories", limiter, allCategoriesRouter);
+app.use("/api/v1/homes", limiter, homeRouter);
+app.use("/api/v1/cars", limiter, carRouter);
 
 module.exports = app;

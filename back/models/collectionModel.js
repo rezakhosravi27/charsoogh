@@ -24,8 +24,14 @@ collectionSchema.virtual("mobiles", {
   foreignField: "parent",
 });
 
+collectionSchema.virtual("homes", {
+  ref: "Home",
+  localField: "_id",
+  foreignField: "parent",
+});
+
 collectionSchema.pre(/^find/, function (next) {
-  this.populate("mobiles");
+  this.populate("mobiles").populate("homes");
   next();
 });
 

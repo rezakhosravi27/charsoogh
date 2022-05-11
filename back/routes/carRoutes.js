@@ -1,14 +1,14 @@
 const express = require("express");
-const mobileController = require("../controllers/mobileController");
-const authController = require("../controllers/authController");
+const carControllers = require("../controllers/carController");
 const multer = require("multer");
+const authController = require("../controllers/authController");
 
 const DIR = "./public/";
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: (req, file, cb) => {
     cb(null, DIR);
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
     const filename =
       Date.now() + file.originalname.toLowerCase().split(" ").join("-");
     cb(null, filename);
@@ -19,9 +19,9 @@ const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (
-      file.mimetype == "image/jpeg" ||
       file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg"
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/jpeg"
     ) {
       cb(null, true);
     } else {
@@ -38,14 +38,14 @@ router
   .post(
     authController.protect,
     upload.single("image"),
-    mobileController.createMobile
+    carControllers.createCar
   )
-  .get(mobileController.getMobiles);
+  .get(carControllers.getCars);
 
 router
-  .route("/:mobileId")
-  .get(mobileController.getMobile)
-  .patch(authController.protect, mobileController.updateMobile)
-  .delete(authController.protect, mobileController.deleteMobile);
+  .route("/:carId")
+  .get(carControllers.getCar)
+  .delete(authController.protect, carControllers.deleteCar)
+  .patch(authController.protect, carControllers.updateCar);
 
 module.exports = router;
