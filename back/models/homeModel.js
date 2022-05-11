@@ -6,14 +6,19 @@ const homeSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  address: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   price: {
     type: Number,
     required: true,
     min: [0, "price can not  lower 0"],
   },
   explatations: {
-      type: String, 
-      trim: true, 
-      minLength: [20, "explatations can not lower 20 characters"]
-  }
+    type: String,
+    trim: true,
+    minLength: [20, "explatations can not lower 20 characters"],
+  },
 });
