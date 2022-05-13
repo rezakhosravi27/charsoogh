@@ -55,11 +55,6 @@ mobileSchema.pre("save", function (next) {
   next();
 });
 
-mobileSchema.pre(/^find/, function (next) {
-  this.find({ activePost: { $ne: false } });
-  next();
-});
-
 const mobileModel = mongoose.model("Mobiles", mobileSchema);
 
 module.exports = mobileModel;

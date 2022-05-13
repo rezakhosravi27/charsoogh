@@ -25,7 +25,11 @@ exports.createMobile = async (req, res) => {
 
 exports.getMobiles = async (req, res) => {
   try {
-    const mobiles = await mobileModel.find();
+    const query = {
+      ...req.query,
+      activePost: { $nt: false },
+    };
+    const mobiles = await mobileModel.find(query);
     if (!mobiles) {
       return res.status(404).json({
         status: "unSuccess",

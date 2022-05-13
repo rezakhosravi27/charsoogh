@@ -1,7 +1,6 @@
 const homeModel = require("../models/homeModel");
 
 exports.createHome = async (req, res) => {
-  console.log(req.body);
   try {
     const homeData = {
       ...req.body,
@@ -25,9 +24,12 @@ exports.createHome = async (req, res) => {
 };
 
 exports.getHomes = async (req, res) => {
+  const query = {
+    ...req.query,
+    activePost: { $ne: false },
+  };
   try {
-    console.log(req.query);
-    const homes = await homeModel.find(req.query);
+    const homes = await homeModel.find(query);
     res.status(200).json({
       status: "success",
       result: homes.length,

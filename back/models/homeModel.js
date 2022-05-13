@@ -48,11 +48,6 @@ homeSchema.pre("save", function (next) {
   next();
 });
 
-homeSchema.pre(/^find/, function (next) {
-  this.find({ activePost: { $ne: false } });
-  next();
-});
-
 const homeModel = mongoose.model("Home", homeSchema);
 
 module.exports = homeModel;

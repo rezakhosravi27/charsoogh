@@ -42,11 +42,6 @@ carSchema.pre("save", function (next) {
   next();
 });
 
-carSchema.pre(/^find/, function (next) {
-  this.find({ activePost: { $ne: false } });
-  next();
-});
-
 const carModel = mongoose.model("Car", carSchema);
 
 module.exports = carModel;

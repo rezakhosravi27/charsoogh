@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const usersModel = require("../models/usersModel");
 
 exports.protect = async (req, res, next) => {
   try {
@@ -18,8 +19,9 @@ exports.protect = async (req, res, next) => {
     }
 
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded.id);
 
-    const userExist = await usersModel.findById(decoded._id);
+    const userExist = await usersModel.findById(decoded.id);
     if (!userExist) {
       return res.status(404).json({
         status: "unSuccess",

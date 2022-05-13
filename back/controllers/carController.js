@@ -1,7 +1,6 @@
 const carModel = require("../models/carModel");
 
 exports.createCar = async (req, res) => {
-  console.log(req.headers.authorization);
   const url = req.protocol + "://" + req.get("host");
   try {
     const carData = {
@@ -26,7 +25,11 @@ exports.createCar = async (req, res) => {
 
 exports.getCars = async (req, res) => {
   try {
-    const cars = await carModel.find();
+    const query = {
+      ...req.query,
+      activePost: { $ne: false },
+    };
+    const cars = await carModel.find(query);
     res.status(200).json({
       status: "success",
       data: {
